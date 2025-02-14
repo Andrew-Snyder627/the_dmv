@@ -15,7 +15,9 @@ class Facility
   #   @services = []
   # end
 
-  def add_services(service)
+  def add_service(service) #simple typo error
     @services << service
   end
 end
+
+#fixed the errors with dmv and passed test immediately
