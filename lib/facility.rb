@@ -19,3 +19,5 @@ class Facility
     @services << service
   end
 end
+
+#fixed the errors with dmv and passed test immediately
