@@ -24,7 +24,7 @@ class Facility
     plate_type = assign_plate_type(vehicle.year, vehicle.engine) #calling this method below
     vehicle.plate_type = plate_type
 
-    fee = calculate_registration_fee(plate_type)
+    fee = calculate_registration_fee(plate_type) #Error here, may be coming from hash in 
     @collected_fees += fee
     @registered_vehicles << vehicle
 
@@ -43,6 +43,7 @@ class Facility
 
   def calculate_registration_fee(plate_type) #takes plate type and assigns a fee value
     fees = {:antique => 25, :ev => 200, :regular => 100}
+    fees[plate_type]
   end
 end
 
