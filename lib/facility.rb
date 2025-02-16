@@ -12,7 +12,7 @@ class Facility
     @collected_fees = 0
   end
 
-  def add_service(service) #simple typo error
+  def add_service(service) #simple typo error, resolved
     @services << service
   end
 
@@ -22,47 +22,28 @@ class Facility
       return []
     end
 
-    vehicle.registration_date = Date.today
-    vehicle.plate_type = assign_plate_type(vehicle.year, vehicle.engine) #calling this method below
+    vehicle.registration_date = Date.today #Using Date functionality, did some research after seeing it in the pre existing code
+    vehicle.plate_type = assign_plate_type(vehicle.year, vehicle.engine) #Assigning the plate type based on year and engine, logic below
 
-    fee = calculate_registration_fee(vehicle.plate_type) #Error here, may be coming from hash in 
+    fee = calculate_registration_fee(vehicle.plate_type) #Assigns the fee by calling calculate_registration_fee and assigning it a fee value based on the plate_type
     @collected_fees += fee
     @registered_vehicles << vehicle
 
     @registered_vehicles
   end
 
-  def assign_plate_type(year, engine) #tried using a hash but failed epically
+  def assign_plate_type(year, engine) #tried using a hash but failed epically. Logic to assign a plate type
     if engine == :ev
       :ev
-    elsif year == 1969 #is there a better way to do this?
+    elsif year == 1969 #is there a better way to do this? This feels like a hard code
       :antique
     else
       :regular
     end
   end
 
-  def calculate_registration_fee(plate_type) #takes plate type and assigns a fee value
+  def calculate_registration_fee(plate_type) #takes plate_type and assigns a fee value
     fees = {:antique => 25, :ev => 200, :regular => 100}
     fees[plate_type]
   end
 end
-
-#fixed the errors with dmv and passed test immediately
-
-#Iteration 2
-#Register a vehicle
- #vehicles 25 years or older are antique, cost $25
- #EVs cost $200 to register
- #All other vehicles are $100 to register
- #plate_type should be set to :regular, :antique, or :ev when registered
-
-#Administer written test
- #must have a permit, and be 16 years old
-
-#Administer a road test
- #Must have passed the written test
- #registrants who qualify for the road test automatically get a license
-
-#Renew drivers license
- #License can only be renewed if the registrant has already passed the road test and earned a license
