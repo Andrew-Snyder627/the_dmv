@@ -9,9 +9,9 @@ RSpec.describe Facility do
     @bolt = Vehicle.new({vin: '987654321abcdefgh', year: 2019, make: 'Chevrolet', model: 'Bolt', engine: :ev} )
     @camaro = Vehicle.new({vin: '1a2b3c4d5e6f', year: 1969, make: 'Chevrolet', model: 'Camaro', engine: :ice} )
 
-    registrant_1 = Registrant.new('Bruce', 18, true)
-    registrant_2 = Registrant.new('Penny', 16)
-    registrant_3 = Registrant.new('Tucker', 15)
+    @registrant_1 = Registrant.new('Bruce', 18, true)
+    @registrant_2 = Registrant.new('Penny', 16)
+    @registrant_3 = Registrant.new('Tucker', 15)
 
   end
   describe '#initialize' do

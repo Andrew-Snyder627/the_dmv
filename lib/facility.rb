@@ -19,7 +19,7 @@ class Facility
   def register_vehicle(vehicle)
     if @services.include?('Vehicle Registration') #checking if service is offered
     else
-      return []
+      return [] #should I change this to nil?
     end
 
     vehicle.registration_date = Date.today #Using Date functionality, did some research after seeing it in the pre existing code
@@ -52,7 +52,7 @@ class Facility
   def administer_written_test(registrant)
     if @services.include?('Written Test') && registrant.age >= 16 && registrant.permit?
       registrant.license_data[:written] = true
-      true
+      true #explicitly giving a true outcome, I wasn't sure if it would work without it
     else
       false
     end
@@ -61,7 +61,7 @@ class Facility
   def administer_road_test(registrant)
     if @services.include?('Road Test') && registrant.license_data[:written]
       registrant.license_data[:license] = true
-      true
+      true #explicitly giving a true outcome, I wasn't sure if it would work without it
     else
       false
     end
@@ -70,7 +70,7 @@ class Facility
   def renew_drivers_license(registrant)
     if @services.include?('Renew License') && registrant.license_data[:license]
       registrant.license_data[:renewed] = true
-      true
+      true #explicitly giving a true outcome, I wasn't sure if it would work without it
     else
       false
     end
