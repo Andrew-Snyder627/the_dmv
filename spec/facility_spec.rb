@@ -52,12 +52,12 @@ RSpec.describe Facility do
       expect(@cruz.plate_type).to eq(:regular)
       expect(@facility_1.collected_fees).to eq(100)
       #Checking camero registration
-      expect(@facility_1.register_vehicle(@camero)).to eq([@cruz, @camero])
+      expect(@facility_1.register_vehicle(@camaro)).to eq([@cruz, @camaro])
       expect(@camaro.registration_date).to be_a(Date)
       expect(@camaro.plate_type).to eq(:antique)
       expect(@facility_1.collected_fees).to eq(125) #25 for antique, total collected fees should be 125 at this point
       #Checking bolt registration
-      expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @camero, @bolt])
+      expect(@facility_1.register_vehicle(@bolt)).to eq([@cruz, @camaro, @bolt])
       expect(@bolt.registration_date).to be_a(Date)
       expect(@bolt.plate_type).to eq(:ev)
       expect(@facility_1.collected_fees).to eq(325) #325 total collected fees for this facility

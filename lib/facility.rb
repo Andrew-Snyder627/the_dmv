@@ -1,3 +1,5 @@
+require 'date'
+
 class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
@@ -21,10 +23,9 @@ class Facility
     end
 
     vehicle.registration_date = Date.today
-    plate_type = assign_plate_type(vehicle.year, vehicle.engine) #calling this method below
-    vehicle.plate_type = plate_type
+    vehicle.plate_type = assign_plate_type(vehicle.year, vehicle.engine) #calling this method below
 
-    fee = calculate_registration_fee(plate_type) #Error here, may be coming from hash in 
+    fee = calculate_registration_fee(vehicle.plate_type) #Error here, may be coming from hash in 
     @collected_fees += fee
     @registered_vehicles << vehicle
 
