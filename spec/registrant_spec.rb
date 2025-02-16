@@ -38,13 +38,4 @@ RSpec.describe Registrant do
 
         expect(registrant_2.permit?).to be true
     end
-
-    it 'can administer written tests' do
-        dmv = Dmv.new
-        registrant_1 = Registrant.new('Bruce', 18, true)
-        registrant_2 = Registrant.new('Penny', 16)
-        registrant_3 = Registrant.new('Tucker', 15)
-
-        
-    end
 end

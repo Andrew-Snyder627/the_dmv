@@ -46,4 +46,33 @@ class Facility
     fees = {:antique => 25, :ev => 200, :regular => 100}
     fees[plate_type]
   end
+
+  #Methods for written/road tests and renewing drivers license
+
+  def administer_written_test(registrant)
+    if @services.include?('Written Test') && registrant.age >= 16 && registrant.permit?
+      registrant.license_data[:written] = true
+      true
+    else
+      false
+    end
+  end
+
+  def administer_road_test(registrant)
+    if @services.include?('Road Test') && registrant.license_data[:written]
+      registrant.license_data[:license] = true
+      true
+    else
+      false
+    end
+  end
+
+  def renew_drivers_license(registrant)
+    if @services.include?('Renew License') && registrant.license_data[:license]
+      registrant.license_data[:renewed] = true
+      true
+    else
+      false
+    end
+  end
 end
