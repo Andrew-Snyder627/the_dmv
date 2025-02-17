@@ -4,10 +4,10 @@ class Facility
   attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
 
   def initialize(info) #since the input is a hash, I need to expect a hash. This is now expecting an info hash with name, address, phone
-    @name = info[:name]
-    @address = info[:address]
+    @name = info[:dmv_office]
+    @address = "#{info[:address_li]} #{info[:address__1]} #{info[:city]}, #{info[:state]} #{info[:zip]}"
     @phone = info[:phone]
-    @services = []
+    @services = parse_services(info[:services_p]) #I'll need a method to handle this string and turn it into an array
     @registered_vehicles = []
     @collected_fees = 0
   end
@@ -74,5 +74,18 @@ class Facility
     else
       false
     end
+  end
+
+  #Method to handle string given from CO data
+  def parse-services(services_string)
+    return [] if services_string.nil? #Protecting against nil, just return a blank array
+    services_array = services_string.split('; ')
+    cleaned_services = []
+
+    services_array.each do |service|
+      cleaned_services << service.strip #remove end spacing
+    end
+
+    cleaned_services
   end
 end
