@@ -1,13 +1,14 @@
 require 'date'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name, :address, :phone, :services, :photo, :registered_vehicles, :collected_fees
 
   def initialize(info) #since the input is a hash, I need to expect a hash. This is now expecting an info hash with name, address, phone
     @name = info[:dmv_office]
     @address = "#{info[:address_li]} #{info[:address__1]} #{info[:city]}, #{info[:state]} #{info[:zip]}"
     @phone = info[:phone]
     @services = parse_services(info[:services_p]) #I'll need a method to handle this string and turn it into an array
+    @photo = info[:photo]
     @registered_vehicles = []
     @collected_fees = 0
   end
