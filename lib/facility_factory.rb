@@ -10,4 +10,6 @@ class FacilityFactory
 
         facilities
     end
+
+    #Add in logic to handle data from 
 end
