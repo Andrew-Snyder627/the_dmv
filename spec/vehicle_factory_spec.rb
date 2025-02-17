@@ -29,7 +29,7 @@ RSpec.describe VehicleFactory do
         factory = VehicleFactory.new
         vehicles = factory.create_vehicles(ev_data)
 
-        vehicles.each do |vehicle|
+        vehicles.each do |vehicle| #trying iteration in my test, seems to work!
             expect(vehicle.engine).to eq(:ev)
         end
     end

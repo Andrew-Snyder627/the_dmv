@@ -9,11 +9,11 @@ class Vehicle
   attr_accessor :registration_date, :plate_type #trying accessor to make these accesible when registering vehicles          
 
   def initialize(vehicle_details)
-    @vin = vehicle_details[:vin]
-    @year = vehicle_details[:year]
+    @vin = vehicle_details[:vin] || vehicle_details[:vin_1_10]
+    @year = vehicle_details[:year] || vheicle_details[:model_year]
     @make = vehicle_details[:make]
     @model = vehicle_details[:model]
-    @engine = vehicle_details[:engine]
+    @engine = vehicle_details[:engine] || :ev
     @registration_date = vehicle_details[:registration_date] || nil #trying to get my vehicle registration working by adding attr_accessor, but I need to keep the funtionality that passed the first test
     @plate_type = nil #nil until registration/assignment
   end
