@@ -77,7 +77,7 @@ class Facility
   end
 
   #Method to handle string given from CO data
-  def parse-services(services_string)
+  def parse_services(services_string)
     return [] if services_string.nil? #Protecting against nil, just return a blank array
     services_array = services_string.split(/[,;]\s*/) #had to look this up, may be wrong
     cleaned_services = []
