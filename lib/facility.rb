@@ -1,7 +1,7 @@
 require 'date'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :photo, :registered_vehicles, :collected_fees
+  attr_reader :name, :address, :phone, :services, :hours, :photo, :registered_vehicles, :collected_fees
 
   def initialize(info) #since the input is a hash, I need to expect a hash. This is now expecting an info hash with name, address, phone
     @name = info[:dmv_office] || info[:office_name]
