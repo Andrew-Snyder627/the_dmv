@@ -21,6 +21,16 @@ RSpec.describe VehicleFactory do
         expect(first_vehicle.make).to eq("NISSAN")
         expect(first_vehicle.model).to eq("Leaf")
         expect(first_vehicle.year).to eq("2016")
-        expect(first_vehicle.vin).to eq("1N4B")
+        expect(first_vehicle.vin).to eq("1N4BZ0CP3G")
+    end
+
+    it 'assigns the correct engine type to each vehicle, ev' do
+        ev_data = DmvDataService.new.wa_ev_registrations
+        factory = VehicleFactory.new
+        vehicles = factory.create_vehicles(ev_data)
+
+        vehicles.each do |vehicle|
+            expect(vehicle.engine).to eq(:ev)
+        end
     end
 end
