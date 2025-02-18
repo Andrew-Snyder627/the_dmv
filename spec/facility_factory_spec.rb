@@ -25,7 +25,7 @@ RSpec.describe FacilityFactory do
         expect(first_facility.photo).to eq("images/Tremont.jpg")
     end
 
-    xit 'can create facilities from NY DMV dataset' do
+    it 'can create facilities from NY DMV dataset' do
         new_york_data = DmvDataService.new.ny_dmv_office_locations
         factory = FacilityFactory.new
 
