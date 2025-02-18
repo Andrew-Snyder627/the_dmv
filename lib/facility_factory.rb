@@ -8,6 +8,8 @@ class FacilityFactory
             elsif facility_data.key?(:office_name) #New York dataset
                 facilities << create_ny_facility(facility_data)
             #MO dataset
+            elsif facility_data.key?(:name) #Missouri dataset
+                facilities << create_mo_facility(facility_data)
             else
                 puts "Unknown data format"
             end
@@ -38,7 +40,16 @@ class FacilityFactory
         )
     end
 
-    #MO facility block
+    def create_mo_facility(data)
+        Facility.new(
+            name: data[:name],
+            address: "#{data[:address1]} #{data[:city]}, #{data[:state]} #{data[:zipcode]}", #handling address parsing here
+            phone: data[:phone] || "N/A",
+            services: [], #Missouri has no service data
+            hours: data[:daysopen] || "No hours available", #using the daysopen string here
+            photo: nil #no photo data for Missouri
+        )
+    end
 
     def format_address(info)
         if info[:address_li] && info[:address__1] #Colorado dataset
@@ -88,11 +99,11 @@ class FacilityFactory
     end
 
     def format_phone(phone_number)
-        return "N/A" if phone_number.nil? || phone_number.strip.empty?
+        return "N/A" if phone_number.nil? || phone_number.strip.empty? #added multiple checks to clear an error, turned out to be something else but keeping anyway
         if phone_number.length == 10
             "(#{phone_number[0,3]}) #{phone_number[3,3]}-#{phone_number[6,4]}"
         else
-            "N/A"
+            phone_number
         end
     end
 end

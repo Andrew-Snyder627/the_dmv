@@ -42,13 +42,19 @@ RSpec.describe FacilityFactory do
 
     end
 
-    xit 'can create facilities from MO DMV dataset' do
+    it 'can create facilities from MO DMV dataset' do
         missouri_data = DmvDataService.new.mo_dmv_office_locations
         factory = FacilityFactory.new
 
         facilities = factory.create_facilities(missouri_data)
         expect(facilities).to all(be_a(Facility))
 
+        first_facility = facilities.first
+
         #add in expects based on dataset
+        expect(first_facility.name).to eq("Clayton")
+        expect(first_facility.address).to eq("147 N Meramec Ave Clayton, MO 63105")
+        expect(first_facility.phone).to eq("(314) 499-7223")
+        expect(first_facility.hours).to include("Monday - Friday 8:30-5:00")
     end
 end
