@@ -20,8 +20,8 @@ class FacilityFactory
         Facility.new(
             name: data[:dmv_office],
             address: format_address(data),
-            phone: format_phone(data[:phone]) || "N/A",
-            services: parse_services(data[;services_p]),
+            phone: data[:phone] || "N/A",
+            services: parse_services(data[:services_p]),
             hours: data[:hours] || "No hours available", #CO does not have hours data
             photo: data[:photo] || "No photo available"
         )
@@ -32,7 +32,7 @@ class FacilityFactory
             name: data[:office_name],
             address: format_address(data),
             phone: format_phone(data[:public_phone_number]),
-            services: [] #NY does not provide services data
+            services: [], #NY does not provide services data
             hours: format_hours(data)
         )
     end
@@ -50,6 +50,44 @@ class FacilityFactory
     end
 
     def parse_services(services_string)
+        if services_string.nil?
+            return []
+        else
+            services_array = services_string.split(/[,;]\s*/) #had to do some research here, regex seemed the best
+            cleaned_services = []
 
+            services_array.each do |service|
+                cleaned_services << service.strip
+            end
 
+            cleaned_services
+        end
+    end
+
+    # def parse_services(services_string)
+  #   return [] if services_string.nil? #Protecting against nil, just return a blank array, like NY.
+  #   services_array = services_string.split(/[,;]\s*/) #had to look this up, may be wrong
+  #   cleaned_services = []
+
+  #   services_array.each do |service|
+  #     cleaned_services << service.strip #remove end spacing
+  #   end
+
+  #   cleaned_services
+  # end
+
+    def format_hours(info)
+        days = %w[monday tuesday wednesday thursday friday saturday sunday]
+        hours = days.map do |day|
+            if info["#{day}_beginning_hours".to_sym] && info["#{day}_ending_hours".to_sym]
+                "#{day.capitalize}: #{info["#{day}_beginning_hours".to_sym]} - #{info["#{day}_ending_hours".to_sym]}"
+            end
+        end
+        hours.compact
+    end
+
+    def format_phone(phone_number)
+        return "N/A" if phone_number.nil?
+        "(#{phone_number[0,3]}) #{phone_number[3,3]}-#{phone_number[6,4]}"
+    end
 end
