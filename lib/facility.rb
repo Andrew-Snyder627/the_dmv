@@ -101,4 +101,6 @@ class Facility
   #     "Address not available" #Handling no address situations
   #   end
   # end
+  #I tried adding this functionality into the facility class but as I started the NY & CO datasets, I realized this would become very messy.
+  #This functionality now resides in the FacilityFactory
 end

@@ -89,13 +89,13 @@ class FacilityFactory
   # end
 
     def format_hours(info)
-        days = %w[monday tuesday wednesday thursday friday saturday sunday]
-        hours = days.map do |day|
+        days = %w[monday tuesday wednesday thursday friday saturday sunday] #shorthand notation for days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+        hours = days.map do |day| #tried using map here, but not super confident, would rather use each but made this work
             if info["#{day}_beginning_hours".to_sym] && info["#{day}_ending_hours".to_sym]
                 "#{day.capitalize}: #{info["#{day}_beginning_hours".to_sym]} - #{info["#{day}_ending_hours".to_sym]}"
             end
         end
-        hours.compact
+        hours.compact #removing nil values if any to clean up the string.
     end
 
     def format_phone(phone_number)
