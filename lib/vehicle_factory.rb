@@ -13,3 +13,4 @@ class VehicleFactory
         vehicles
     end
 end
+#Looking back, I would add in more functionality here rather than into my vehicle class.
