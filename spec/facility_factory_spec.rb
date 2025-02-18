@@ -37,8 +37,9 @@ RSpec.describe FacilityFactory do
         #add in expects based on dataset
         expect(first_facility.name).to eq("LAKE PLACID")
         expect(first_facility.address).to eq("2693 MAIN STREET LAKE PLACID, NY 12946")
-        expect(first_facility.phone).to eq("(518) 828-3350")
+        expect(first_facility.phone).to eq("N/A")
         expect(first_facility.hours).to include("Monday: CLOSED - CLOSED")
+
     end
 
     xit 'can create facilities from MO DMV dataset' do

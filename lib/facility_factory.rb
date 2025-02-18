@@ -3,9 +3,9 @@ class FacilityFactory
         facilities = []
 
         data.each do |facility_data|
-            if facility_data[:dmv_office] #Colorado dataset
+            if facility_data.key?(:dmv_office) #Colorado dataset
                 facilities << create_co_facility(facility_data)
-            elsif facility_data[:office_name] #New York dataset
+            elsif facility_data.key?(:office_name) #New York dataset
                 facilities << create_ny_facility(facility_data)
             #MO dataset
             else
@@ -33,7 +33,8 @@ class FacilityFactory
             address: format_address(data),
             phone: format_phone(data[:public_phone_number]),
             services: [], #NY does not provide services data
-            hours: format_hours(data)
+            hours: format_hours(data),
+            photo: nil
         )
     end
 
@@ -87,7 +88,11 @@ class FacilityFactory
     end
 
     def format_phone(phone_number)
-        return "N/A" if phone_number.nil?
-        "(#{phone_number[0,3]}) #{phone_number[3,3]}-#{phone_number[6,4]}"
+        return "N/A" if phone_number.nil? || phone_number.strip.empty?
+        if phone_number.length == 10
+            "(#{phone_number[0,3]}) #{phone_number[3,3]}-#{phone_number[6,4]}"
+        else
+            "N/A"
+        end
     end
 end
