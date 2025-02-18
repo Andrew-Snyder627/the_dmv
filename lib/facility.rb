@@ -1,13 +1,15 @@
 require 'date'
 
 class Facility
-  attr_reader :name, :address, :phone, :services, :registered_vehicles, :collected_fees
+  attr_reader :name, :address, :phone, :services, :hours, :photo, :registered_vehicles, :collected_fees
 
-  def initialize(info) #since the input is a hash, I need to expect a hash. This is now expecting an info hash with name, address, phone
-    @name = info[:name]
-    @address = info[:address]
-    @phone = info[:phone]
-    @services = []
+  def initialize(name:, address:, phone:, services: [], hours: nil, photo: nil)
+    @name = name
+    @address = address
+    @phone = phone
+    @services = services
+    @hours = hours
+    @photo = photo
     @registered_vehicles = []
     @collected_fees = 0
   end
@@ -75,4 +77,28 @@ class Facility
       false
     end
   end
+
+  #Method to handle string given from CO data
+  #Below will be methods handling data parcing
+  # def parse_services(services_string)
+  #   return [] if services_string.nil? #Protecting against nil, just return a blank array, like NY.
+  #   services_array = services_string.split(/[,;]\s*/) #had to look this up, may be wrong
+  #   cleaned_services = []
+
+  #   services_array.each do |service|
+  #     cleaned_services << service.strip #remove end spacing
+  #   end
+
+  #   cleaned_services
+  # end
+
+  # def format_address(info)
+  #   if info[:address_li] && info[:address__1] #Colorado dataset
+  #     "#{info[:address_li]} #{info[:address__1]} #{info[:city]}, #{info[:state]} #{info[:zip]}"
+  #   elsif info[:street_address_line_1] && info[:zip_code] #New York dataset
+  #     "#{info[:street_address_line_1]} #{info[:city]}, #{info[:state]} #{info[zip_code]}"
+  #   else
+  #     "Address not available" #Handling no address situations
+  #   end
+  # end
 end
